@@ -1,24 +1,17 @@
 #!/usr/bin/env python3
-"""Coroutine that executes async_comprehension four times """
 
+""" Async Comprehensions """
 
-import asyncio
-from typing import List
+from asyncio import gather
+from time import time
 
 async_comprehension = __import__('1-async_comprehension').async_comprehension
 
 
 async def measure_runtime() -> float:
-    """
-    Coroutine that executes async_comprehension four times
-    """
-    start_time = asyncio.get_event_loop().time()
-    await asyncio.gather(
-        async_comprehension(),
-        async_comprehension(),
-        async_comprehension(),
-        async_comprehension()
-    )
-    end_time = asyncio.get_event_loop().time()
-    total_runtime = end_time - start_time
-    return total_runtime
+    """ Run time for four parallel comprehensions """
+    start = time()
+    tasks = [async_comprehension() for i in range(4)]
+    await gather(*tasks)
+    end = time()
+    return (end - start)

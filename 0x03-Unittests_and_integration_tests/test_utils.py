@@ -53,6 +53,7 @@ class TestGetJson(unittest.TestCase):
 
             self.assertEqual(result, test_payload)
 
+
 class TestMemoize(unittest.TestCase):
     """ Class for Testing Memoize """
 
